@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 export default class Dice extends Component {
     
+    possibleOutcomes =  [{number: 2, combinations: 1}, {number:3, combinations:2}, {number:4, combinations:3}, {number:5, combinations:4}, {number:6, combinations:5},{number:7, combinations:6},{number:8, combinations:5}, {number:9,  combinations: 4}, {number:10,  combinations: 3}, {number:11,  combinations: 2}, {number:12,  combinations: 1} ];
+
     state = {
         roll: this.rollDice() + this.rollDice(),
         rollCount:0,
@@ -24,8 +26,8 @@ export default class Dice extends Component {
         do {
              roll =  this.rollDice() + this.rollDice();            
        
-            occurrences = this.props.currentOutcomes.find(item => compare(item.number)).occurrences
-            combinations = this.props.possibleOutcomes.find(item => compare(item.number) ).combinations
+            occurrences = this.props.currentOutcomes.find(item => compare(item.number)).occurrences;
+            combinations = this.possibleOutcomes.find(item => compare(item.number) ).combinations;
     
             console.log(combinations);
         }while(occurrences >= combinations)
