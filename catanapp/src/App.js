@@ -1,12 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">Catan Event Generator</header>
-      
+    <div>
+      <header >Catan Event Generator</header>      
     </div>
   );
 }
