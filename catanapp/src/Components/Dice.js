@@ -3,27 +3,36 @@ import React, { Component } from 'react'
 export default class Dice extends Component {
     
     state = {
-        roll: 3
+        roll: 3,
+        rollCount:0,
     }
 
     onClick = () => {
-        let roll =  this.rollDice() + this.rollDice();            
-       
-        let occurrences = this.props.outcomes.currentOutcomes.find(item => item.number === roll ).occurrences
-        let combinations = this.props.outcomes.possibleOutcomes.find(item => item.number === roll ).combinations
-
-        console.log(combinations);
-
-        if(occurrences >= combinations){
-            return this.onClick();
+        if(this.state.rollCount >= 31){
+            alert("happy new year!");
+            return;
         }
 
-        this.props.recordRoll(roll);
+        let occurrences;
+        let combinations;
+        let roll;
+        
+        function compare(number){
+            return number  === roll
+        };
 
-        this.setState({roll: roll});    
-        // if(this.state.outcomes.currentOutcomes.single(item => item.number == roll ).occurrences >= this.stati.outcomes.possibleOutcomes.single(item => item.number == roll)){
-        //     alert("wibble");
-        // }
+        do {
+             roll =  this.rollDice() + this.rollDice();            
+       
+            occurrences = this.props.outcomes.currentOutcomes.find(item => compare(item.number)).occurrences
+            combinations = this.props.outcomes.possibleOutcomes.find(item => compare(item.number) ).combinations
+    
+            console.log(combinations);
+        }while(occurrences >= combinations)
+
+        this.props.recordRoll(roll);
+        this.setState({rollCount: this.state.rollCount + 1});
+        this.setState({roll: roll});  
     }
 
     rollDice() {
