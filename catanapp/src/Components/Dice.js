@@ -33,7 +33,7 @@ export default class Dice extends Component {
         }while(occurrences >= combinations)
 
         this.props.recordRoll(roll);
-        this.setState({rollCount: this.state.rollCount + 1});
+        this.setState((prevState, props) => {return {rollCount: prevState.rollCount + 1}});
         this.setState({roll: roll});  
     }
 
