@@ -4,9 +4,14 @@ export default class Dice extends Component {
     
     possibleOutcomes =  [{number: 2, combinations: 1}, {number:3, combinations:2}, {number:4, combinations:3}, {number:5, combinations:4}, {number:6, combinations:5},{number:7, combinations:6},{number:8, combinations:5}, {number:9,  combinations: 4}, {number:10,  combinations: 3}, {number:11,  combinations: 2}, {number:12,  combinations: 1} ];
 
-    state = {
-        roll: this.rollDice() + this.rollDice(),
-        rollCount:0,
+   
+    constructor(props){
+        super(props);
+    
+        this.state = {
+            roll: this.rollDice() + this.rollDice(),
+            rollCount: props.rollCount,
+        }    
     }
 
     onClick = () => {

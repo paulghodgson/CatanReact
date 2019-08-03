@@ -8,7 +8,8 @@ export default class App extends Component {
 
   state = {      
       currentOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}],    
-      isNewYear: true
+      isNewYear: true,
+      rollCount:0,
   }
   
   constructor(props){
@@ -26,10 +27,11 @@ export default class App extends Component {
 
   newYear(){
     this.setState({isNewYear:true});
-    }
+  }
 
   janTheFirst(){
     this.setState({isNewYear:false});
+    this.setState({rollCount: 0});
     this.setState({currentOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}]});
   }
 
@@ -37,7 +39,7 @@ export default class App extends Component {
     return (      
       <div style={{width: 800}}>     
           <Header/>
-          <Dice recordRoll={this.recordRoll}  currentOutcomes = {this.state.currentOutcomes} newYear={this.newYear} >/></Dice>   
+          <Dice recordRoll={this.recordRoll}  currentOutcomes = {this.state.currentOutcomes} newYear={this.newYear} rollCount={this.state.rollCount}>/></Dice>   
           <NewYear  isNewYear={this.state.isNewYear} janTheFirst={this.janTheFirst}     />
       </div>
     );    
