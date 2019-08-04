@@ -5,6 +5,19 @@ import NewYear from './Components/NewYear'
 import React, { Component } from 'react'
 
 export default class App extends Component {
+  events = [{name: "Catan Prospers", description: "The settlers labor.  Catan prospers!", maxOccurrences: 16},
+  {name: "Trade Advantage", description: "The player with the 'Longest Road' card (if not claimed the player with more roads than any other player) may take 1 resource card from any player.  You may not take a development card. C&K: You may not take a progress card", maxOccurrences: 1},
+  {name: "Robber Flees!", description: "The robber returns to the desert.  Do not draw a from any player. ", maxOccurrences: 2},
+  {name: "Robber Attacks!", description: "1. Each player with more than 7 cards must discard half of their cards (rounded down).<br/>2. Move the robber.  Draw 1 random resourceor commmodity card from any 1 player with a settlement and/or cit next to the robber's hex", requiredDiceRoll: 7 },
+  {name: "Conflict", description: "The player with the 'Largest Army' card (if not claimed, the single player with the most knight cards) takes 1 resource card at random from any one player.  C&K: Each player with the highest total value of active knights takes 1 random resource/commodity card.  You may not take a progress card.", maxOccurrences: 1},
+  {name: "Tournament", description: "The player(s) with the most knight cards revealed takes 1 resources of their choice from the bank. C&K: The player(s) with the most active knight points takes 1 resource card.  You may not take a commodity card.", maxOccurrences: 1},
+  {name: "Earthquake", description: "Each player turns 1 (maximum) of his roads sideways.  You may not build roads until you pay 1 lumber and 1 brick to repair your turned road.  Roads turned sideways still count towards the 'Longest Road.'", maxOccurrences: 1},
+  {name: "Neighborly Assistance", description: "The player(s) with the most VPs give(s) 1 player with fewer VPs 1 resource card of the giver's choice.  If a giver doesn't have a resource card to give, that giver ignroes this event.  C&K: You may give a commodity in place of a resource.  You must give a commodity if that's all you have.", maxOccurrences: 10},
+  {name: "Epidemic", description: "Each player recieves only 1 resource for each of their cities that produces this turn.  C&K: You may not take a commodity card.", maxOccurrences: 2},
+  {name: "Plentiful Year", description: "Each player takes 1 resource of his choice from the bank. C&K: You may not take a commodity card.", maxOccurrences: 1},
+  {name: "Calm Seas", description: "The player(s) with the most harbors recieve(s) 1 resource card of their choice from the bank. C&K: You may not take a commodity card.", maxOccurrences: 2},
+  {name: "Good Neighbors", description: "Each player gives the player to his left 1 resource of the giver's choice (if they have one). C7K: instead of a resource you may give a commodity.  You must give a commodity if you do not have a resource.", maxOccurrences},
+]
 
   state = {      
       currentOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}],    
