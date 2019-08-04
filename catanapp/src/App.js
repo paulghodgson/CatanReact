@@ -66,7 +66,7 @@ export default class App extends Component {
 
     const newOutcomes = [...this.state.rollOutcomes];
     newOutcomes.find(item => item.number === roll).occurrences++;
-    this.setState({currentOutcomes: newOutcomes});  
+    this.setState({rollOutcomes: newOutcomes});  
     
     let event = this.events.find(p => p.requiredDiceRoll === roll);
      
@@ -112,7 +112,7 @@ export default class App extends Component {
   janTheFirst(){
     this.setState({isNewYear:false});
     this.setState({rollCount: 0});
-    this.setState({currentOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}]});
+    this.setState({rollOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}]});
     this.setState({ eventOutcomes: [0,0,0,0,0,0,0,0,0,0,0,0]});
   }
 
