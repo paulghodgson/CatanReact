@@ -68,15 +68,41 @@ export default class App extends Component {
     newOutcomes.find(item => item.number === roll).occurrences++;
     this.setState({currentOutcomes: newOutcomes});  
     
-    this.drawEvent(7);
+    let event = this.events.find(p => p.requiredDiceRoll === roll);
+     
+    if(event !== undefined) {
+      this.setState({event:event});
+    }
+    else{
+      this.drawEvent();
+    }
+    
   }
 
-  drawEvent(roll){
-    let fixEvent = this.events.find(p => p.requiredDiceRoll);
-    if(fixEvent !== null)
-     this.setState({event:fixEvent});
+  drawEvent(){
+    let roll = Math.floor(Math.random() * this.events.length)
+    let fixEvent = this.events.find(p => p.requiredDiceRoll === roll);
 
-    
+    if(fixEvent !== undefined || this.events[roll].requiredDiceRoll !== undefined){
+      this.drawEvent();
+      return;
+    }
+
+    let event = this.events[roll];
+
+    if(event.maxOccurrences <= this.state.eventOutcomes[roll]) {
+      console.log("redrawing event card");
+      this.drawEvent();
+      return;
+    }
+     
+
+    const outcomes = [...this.state.eventOutcomes];
+    outcomes[roll]++;
+
+    this.setState({eventOutcomes: outcomes});
+    this.setState({event: event});
+
   }
 
   newYear(){
@@ -87,6 +113,7 @@ export default class App extends Component {
     this.setState({isNewYear:false});
     this.setState({rollCount: 0});
     this.setState({currentOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}]});
+    this.setState({ eventOutcomes: [0,0,0,0,0,0,0,0,0,0,0,0]});
   }
 
   render() {
