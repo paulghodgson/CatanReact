@@ -3,6 +3,7 @@ import Dice from './Components/Dice';
 import Header from './Components/Header';
 import NewYear from './Components/NewYear'
 import React, { Component } from 'react'
+import EventStack from './Components/EventStack'
 
 export default class App extends Component {
   events = [{name: "Catan Prospers", description: "The settlers labor.  Catan prospers!", maxOccurrences: 16},
@@ -16,14 +17,16 @@ export default class App extends Component {
   {name: "Epidemic", description: "Each player recieves only 1 resource for each of their cities that produces this turn.  C&K: You may not take a commodity card.", maxOccurrences: 2},
   {name: "Plentiful Year", description: "Each player takes 1 resource of his choice from the bank. C&K: You may not take a commodity card.", maxOccurrences: 1},
   {name: "Calm Seas", description: "The player(s) with the most harbors recieve(s) 1 resource card of their choice from the bank. C&K: You may not take a commodity card.", maxOccurrences: 2},
-  {name: "Good Neighbors", description: "Each player gives the player to his left 1 resource of the giver's choice (if they have one). C7K: instead of a resource you may give a commodity.  You must give a commodity if you do not have a resource.", maxOccurrences},
+  {name: "Good Neighbors", description: "Each player gives the player to his left 1 resource of the giver's choice (if they have one). C7K: instead of a resource you may give a commodity.  You must give a commodity if you do not have a resource.", maxOccurrences: 1} ,
 ]
 
   state = {      
-      currentOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}],    
+      rollOutcomes: [{number: 2, occurrences: 0},{number: 3, occurrences: 0},{number: 4, occurrences: 0},{number: 5, occurrences: 0},{number: 6, occurrences: 0},{number: 7, occurrences: 0},{number: 8, occurrences: 0},{number: 9, occurrences: 0},{number: 10, occurrences: 0},{number: 11, occurrences: 0},{number: 12, occurrences: 0}],    
+      eventOutcomes: [0,0,0,0,0,0,0,0,0,0,0,0],
+      event: {name: "", description: "", maxOccurrences: 1, requiredDiceRoll: 0 },
       isNewYear: false,
       rollCount:0,
-      roll:  this.rollDice() + this.rollDice()
+      roll:  " "
   }
   
   rollDice() {
@@ -51,7 +54,7 @@ export default class App extends Component {
 
     do {  
          roll = this.rollDice() + this.rollDice();
-        occurrences = this.state.currentOutcomes.find(item => item.number === roll).occurrences;
+        occurrences = this.state.rollOutcomes.find(item => item.number === roll).occurrences;
         combinations = possibleOutcomes.find(item => item.number ===  roll).combinations;
 
         console.log(combinations);
@@ -60,7 +63,7 @@ export default class App extends Component {
     this.setState({roll: roll});  
     this.setState((prevState, props) => {return {rollCount: prevState.rollCount + 1}});       
 
-    const newOutcomes = [...this.state.currentOutcomes];
+    const newOutcomes = [...this.state.rollOutcomes];
     newOutcomes.find(item => item.number === roll).occurrences++;
     this.setState({currentOutcomes: newOutcomes});   
   }
@@ -80,6 +83,7 @@ export default class App extends Component {
       <div style={{width: 800}}>     
           <Header/>
           <Dice recordRoll={this.recordRoll} roll={this.state.roll} >/></Dice>   
+          <EventStack {...this.state.event}/>
           <NewYear isNewYear={this.state.isNewYear} janTheFirst={this.janTheFirst}     />
       </div>
     );    
